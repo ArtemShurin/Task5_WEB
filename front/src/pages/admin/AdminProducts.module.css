@@ -1,0 +1,380 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e2330;
+  margin: 0;
+}
+
+.addBtn {
+  padding: 8px 22px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+  width: fit-content;
+  align-self: center;
+}
+
+.addBtn:hover { background: #4f46e5; }
+
+.search {
+  padding: 7px 13px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  width: 260px;
+  transition: border-color 0.15s;
+}
+
+.search:focus { border-color: #6366f1; }
+
+.tableWrap {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  background: #f9fafb;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #374151;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover { background: #fafafa; }
+
+.idCell {
+  font-family: monospace;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.productName {
+  font-weight: 600;
+  color: #1e2330;
+  margin-bottom: 2px;
+}
+
+.productDesc {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.noImg {
+  color: #d1d5db;
+  font-size: 12px;
+}
+
+.inStock {
+  display: inline-block;
+  padding: 2px 10px;
+  background: #dcfce7;
+  color: #166534;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.outOfStock {
+  display: inline-block;
+  padding: 2px 10px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.editBtn {
+  padding: 6px 14px;
+  background: #eff6ff;
+  color: #2563eb;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.editBtn:hover { background: #dbeafe; }
+
+.deleteBtn {
+  padding: 6px 14px;
+  background: #fef2f2;
+  color: #dc2626;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.deleteBtn:hover { background: #fee2e2; }
+
+.error, .formError {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.hint {
+  color: #9ca3af;
+  text-align: center;
+  padding: 24px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e2330;
+  margin: 0 0 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.input, .textarea {
+  padding: 9px 13px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+
+.input:focus, .textarea:focus { border-color: #6366f1; }
+
+.textarea { resize: vertical; }
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.cancelBtn {
+  padding: 9px 20px;
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cancelBtn:hover { background: #e5e7eb; }
+
+.saveBtn {
+  padding: 9px 20px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.saveBtn:hover:not(:disabled) { background: #4f46e5; }
+.saveBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.confirmText {
+  color: #4b5563;
+  font-size: 14px;
+  margin: 0 0 24px;
+}
+
+.deleteConfirmBtn {
+  padding: 9px 20px;
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.deleteConfirmBtn:hover { background: #b91c1c; }
+
+.reviewsBtn {
+  padding: 6px 14px;
+  background: #f0fdf4;
+  color: #16a34a;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.reviewsBtn:hover { background: #dcfce7; }
+
+.reviewsModalInner {
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px;
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reviewList {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.reviewCard {
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.reviewAuthor {
+  font-weight: 700;
+  font-size: 14px;
+  color: #1e2330;
+  margin-right: 8px;
+}
+
+.reviewStars {
+  color: #f59e0b;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.reviewDate {
+  font-size: 12px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.reviewTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.reviewDesc {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.reviewFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}

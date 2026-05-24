@@ -1,0 +1,37 @@
+.form {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+  text-align: left;
+}
+
+.form h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  margin: 6px 0;
+}
+
+.label {
+  font-size: 14px;
+  display: block;
+  margin-top: 6px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin: 4px 0;
+}

@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: orders_db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5433:5432"
+    volumes:
+      - orders_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: orders_app
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/app
+
+volumes:
+  orders_data:

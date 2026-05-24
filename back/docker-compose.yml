@@ -1,0 +1,93 @@
+version: "3.9"
+
+networks:
+  microservices_net:
+    driver: bridge
+
+services:
+
+  # ─── Products DB ───────────────────────────────────────────────
+  products_db:
+    image: postgres:15
+    container_name: shop_db
+    restart: always
+    environment:
+      POSTGRES_DB: shop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./app_products/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - products_data:/var/lib/postgresql/data
+    networks:
+      - microservices_net
+
+  # ─── Products App ──────────────────────────────────────────────
+  products_app:
+    build: ./app_products
+    container_name: products_app
+    restart: always
+    depends_on:
+      - products_db
+    environment:
+      POSTGRES_DB: shop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DB_HOST: products_db
+      DB_PORT: 5432
+      JWT_SECRET: super-secret-jwt-key-change-in-production
+      JWT_ALGORITHM: HS256
+      JWT_EXPIRE_MINUTES: 480
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: admin123
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app_products:/app
+    networks:
+      - microservices_net
+
+  # ─── Orders DB ─────────────────────────────────────────────────
+  orders_db:
+    image: postgres:15
+    container_name: orders_db
+    restart: always
+    environment:
+      POSTGRES_DB: orders
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - orders_data:/var/lib/postgresql/data
+    networks:
+      - microservices_net
+
+  # ─── Orders App ────────────────────────────────────────────────
+  orders_app:
+    build: ./app_orders
+    container_name: orders_app
+    restart: always
+    depends_on:
+      - orders_db
+      - products_app
+    environment:
+      POSTGRES_DB: orders
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DB_HOST: orders_db
+      DB_PORT: 5432
+      PRODUCTS_SERVICE_URL: http://products_app:8000
+      JWT_SECRET: super-secret-jwt-key-change-in-production
+      JWT_ALGORITHM: HS256
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./app_orders:/app
+    networks:
+      - microservices_net
+
+volumes:
+  products_data:
+  orders_data:

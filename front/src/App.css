@@ -1,0 +1,66 @@
+import { useParams, Link } from "react-router-dom";
+import { products } from "../data/products";
+import { useState } from "react";
+
+export default function Product() {
+  const { id } = useParams();
+  const product = products.find((p) => p.id == id);
+
+  const [qty, setQty] = useState(1);
+
+  const addToCart = () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find((item) => item.id === product.id);
+
+    if (existing) existing.qty += qty;
+    else cart.push({ ...product, qty });
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
+  if (!product) return <h2>Товар не найден</h2>;
+
+  return (
+    <>
+      <div className="header">
+        <Link to="/cart" className="cart-btn">
+          🛒 Корзина
+        </Link>
+      </div>
+
+      <div className="container">
+        <div className="product-page">
+          <div className="card product-box">
+
+            <img
+              className="product-img"
+              src="https://via.placeholder.com/300x200?text=Товар"
+              alt={product.name}
+            />
+
+            <h1>{product.name}</h1>
+            <p>{product.description}</p>
+            <h3>{product.price} $</h3>
+
+            <input
+              type="number"
+              min="1"
+              value={qty}
+              onChange={(e) => setQty(Number(e.target.value))}
+            />
+
+            <button onClick={addToCart}>
+              Добавить в корзину
+            </button>
+
+            <br /><br />
+
+            <Link to="/">← Назад</Link>
+
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

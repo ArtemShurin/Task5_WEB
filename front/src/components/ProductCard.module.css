@@ -1,0 +1,52 @@
+.card {
+  width: 220px;
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.badge {
+  display: inline-block;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid #bfdbfe;
+}
+
+.inStock {
+  color: green;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.outOfStock {
+  color: red;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+    max-width: 300px;
+  }
+}

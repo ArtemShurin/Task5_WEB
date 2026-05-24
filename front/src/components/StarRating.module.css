@@ -1,0 +1,29 @@
+.rating {
+  display: flex;
+  gap: 2px;
+  margin: 4px 0 12px;
+}
+
+.star {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0 2px;
+  width: auto;
+  color: #d1d5db;
+  line-height: 1;
+  transition: color 0.1s;
+}
+
+.star:hover {
+  background: none;
+}
+
+.active {
+  color: #f59e0b;
+}
+
+.active:hover {
+  background: none;
+}

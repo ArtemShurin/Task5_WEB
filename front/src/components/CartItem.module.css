@@ -1,0 +1,74 @@
+.card {
+  width: 220px;
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.inStock {
+  color: green;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.outOfStock {
+  color: red;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.qtyControls {
+  display: flex;
+  justify-content: center;
+}
+
+.plus {
+  width: 36px;
+  margin: 5px;
+  background: #22c55e;
+}
+
+.plus:hover {
+  background: #16a34a;
+}
+
+.minus {
+  width: 36px;
+  margin: 5px;
+  background: #f59e0b;
+}
+
+.minus:hover {
+  background: #d97706;
+}
+
+.remove {
+  background: #ef4444;
+}
+
+.remove:hover {
+  background: #dc2626;
+}
+
+.btnGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+    max-width: 300px;
+  }
+}

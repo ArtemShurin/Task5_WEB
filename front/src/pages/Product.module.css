@@ -1,0 +1,40 @@
+.productPage {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.productBox {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.rating {
+  color: #f59e0b;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+.ratingCount {
+  color: #888;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.reviewsSection {
+  max-width: 600px;
+  margin: 32px auto 0;
+}

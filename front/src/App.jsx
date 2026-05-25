@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loadProducts } from "./store/productsSlice";
 
 import Catalog from "./pages/Catalog";
 import Product from "./pages/Product";
@@ -13,6 +16,12 @@ import AdminOrders from "./pages/admin/AdminOrders";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -24,9 +33,9 @@ function App() {
 
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<Navigate to="/admin/products" replace />} />
-        <Route path="/admin/products" element={<ProtectedRoute><AdminProducts /></ProtectedRoute>} />
-        <Route path="/admin/categories" element={<ProtectedRoute><AdminCategories /></ProtectedRoute>} />
-        <Route path="/admin/orders" element={<ProtectedRoute><AdminOrders /></ProtectedRoute>} />
+        <Route path="/admin/products" element={<ProtectedRoute redirectTo="/"><AdminProducts /></ProtectedRoute>} />
+        <Route path="/admin/categories" element={<ProtectedRoute redirectTo="/"><AdminCategories /></ProtectedRoute>} />
+        <Route path="/admin/orders" element={<ProtectedRoute redirectTo="/"><AdminOrders /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

@@ -19,7 +19,7 @@ export async function apiGetCategories(token) {
 }
 
 export async function apiCreateCategory(token, data) {
-  const res = await fetch('/api/categories/create', {
+  const res = await fetch('/api/admin/categories/create', {
     method: 'POST',
     headers: authHeaders(token),
     body: JSON.stringify(data),
@@ -32,7 +32,7 @@ export async function apiCreateCategory(token, data) {
 }
 
 export async function apiUpdateCategory(token, id, data) {
-  const res = await fetch(`/api/categories/${id}/update`, {
+  const res = await fetch(`/api/admin/categories/${id}/update`, {
     method: 'PUT',
     headers: authHeaders(token),
     body: JSON.stringify(data),
@@ -45,7 +45,7 @@ export async function apiUpdateCategory(token, id, data) {
 }
 
 export async function apiDeleteCategory(token, id) {
-  const res = await fetch(`/api/categories/${id}/delete`, {
+  const res = await fetch(`/api/admin/categories/${id}/delete`, {
     method: 'DELETE',
     headers: authHeaders(token),
   })
@@ -59,7 +59,7 @@ export async function apiGetCategoryProducts(token, categoryId) {
 }
 
 export async function apiAddProductToCategory(token, categoryId, productId) {
-  const res = await fetch(`/api/categories/${categoryId}/${productId}/add`, {
+  const res = await fetch(`/api/admin/categories/${categoryId}/${productId}/add`, {
     method: 'PATCH',
     headers: authHeaders(token),
   })
@@ -70,7 +70,7 @@ export async function apiAddProductToCategory(token, categoryId, productId) {
 }
 
 export async function apiRemoveProductFromCategory(token, categoryId, productId) {
-  const res = await fetch(`/api/categories/${categoryId}/product/${productId}`, {
+  const res = await fetch(`/api/admin/categories/${categoryId}/product/${productId}`, {
     method: 'PATCH',
     headers: authHeaders(token),
   })
@@ -87,7 +87,7 @@ export async function apiGetProducts(token) {
 }
 
 export async function apiCreateProduct(token, data) {
-  const res = await fetch('/api/products/create', {
+  const res = await fetch('/api/admin/products/create', {
     method: 'POST',
     headers: authHeaders(token),
     body: JSON.stringify(data),
@@ -100,7 +100,7 @@ export async function apiCreateProduct(token, data) {
 }
 
 export async function apiUpdateProduct(token, id, data) {
-  const res = await fetch(`/api/products/${id}/update`, {
+  const res = await fetch(`/api/admin/products/${id}/update`, {
     method: 'PUT',
     headers: authHeaders(token),
     body: JSON.stringify(data),
@@ -113,7 +113,7 @@ export async function apiUpdateProduct(token, id, data) {
 }
 
 export async function apiDeleteProduct(token, id) {
-  const res = await fetch(`/api/products/${id}/delete`, {
+  const res = await fetch(`/api/admin/products/${id}/delete`, {
     method: 'DELETE',
     headers: authHeaders(token),
   })
@@ -126,15 +126,18 @@ export async function apiGetReviewsByProduct(productId) {
   return res.json()
 }
 
-export async function apiDeleteReview(reviewId) {
-  const res = await fetch(`/api/reviews/${reviewId}/delete`, { method: 'DELETE' })
+export async function apiDeleteReview(token, reviewId) {
+  const res = await fetch(`/api/admin/reviews/${reviewId}/delete`, {
+    method: 'DELETE',
+    headers: authHeaders(token),
+  })
   if (!res.ok) throw new Error('Ошибка удаления отзыва')
 }
 
-export async function apiUpdateReview(reviewId, data) {
-  const res = await fetch(`/api/reviews/${reviewId}/update`, {
+export async function apiUpdateReview(token, reviewId, data) {
+  const res = await fetch(`/api/admin/reviews/${reviewId}/update`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: authHeaders(token),
     body: JSON.stringify(data),
   })
   if (!res.ok) {
@@ -145,19 +148,19 @@ export async function apiUpdateReview(reviewId, data) {
 }
 
 export async function apiGetOrders(token) {
-  const res = await fetch('/api/orders/get_all', { headers: authHeaders(token) })
+  const res = await fetch('/api/admin/orders/get_all', { headers: authHeaders(token) })
   if (!res.ok) throw new Error('Ошибка загрузки заказов')
   return res.json()
 }
 
 export async function apiGetOrderById(token, id) {
-  const res = await fetch(`/api/orders/${id}/get_by_id`, { headers: authHeaders(token) })
+  const res = await fetch(`/api/admin/orders/${id}/get_by_id`, { headers: authHeaders(token) })
   if (!res.ok) throw new Error('Ошибка загрузки заказа')
   return res.json()
 }
 
 export async function apiDeleteOrder(token, id) {
-  const res = await fetch(`/api/orders/${id}/delete`, {
+  const res = await fetch(`/api/admin/orders/${id}/delete`, {
     method: 'DELETE',
     headers: authHeaders(token),
   })
@@ -165,7 +168,7 @@ export async function apiDeleteOrder(token, id) {
 }
 
 export async function apiUpdateOrderStatus(token, id, status) {
-  const res = await fetch(`/api/orders/${id}/update_status`, {
+  const res = await fetch(`/api/admin/orders/${id}/update_status`, {
     method: 'PATCH',
     headers: authHeaders(token),
     body: JSON.stringify({ status }),

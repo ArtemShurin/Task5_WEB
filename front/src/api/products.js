@@ -7,12 +7,6 @@ export async function fetchProducts() {
   return res.json()
 }
 
-export async function fetchProduct(id) {
-  const res = await fetch(`${BASE}/${id}/get_by_id`)
-  if (!res.ok) throw new Error('Товар не найден')
-  return res.json()
-}
-
 export async function fetchCategories() {
   const res = await fetch(`${CATEGORIES_BASE}/get_all`)
   if (!res.ok) throw new Error('Не удалось загрузить категории')

@@ -128,9 +128,13 @@ export default function AdminCategories() {
     }
   }
 
-  const filteredProducts = allProducts.filter((p) =>
-    p.name.toLowerCase().includes(productSearch.toLowerCase())
-  )
+  const filteredCategories = categories
+    .filter((c) => c.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name, 'ru'))
+
+  const filteredProducts = allProducts
+    .filter((p) => p.name.toLowerCase().includes(productSearch.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name, 'ru'))
 
   return (
     <AdminLayout>
@@ -160,10 +164,10 @@ export default function AdminCategories() {
               </tr>
             </thead>
             <tbody>
-              {categories.filter((c) => c.name.toLowerCase().includes(search.toLowerCase())).length === 0 && (
+              {filteredCategories.length === 0 && (
                 <tr><td colSpan={3} className={styles.hint}>Категорий не найдено</td></tr>
               )}
-              {categories.filter((c) => c.name.toLowerCase().includes(search.toLowerCase())).map((cat) => (
+              {filteredCategories.map((cat) => (
                 <tr key={cat.id}>
                   <td><div className={styles.productName}>{cat.name}</div></td>
                   <td><div className={styles.productDesc}>{cat.description}</div></td>

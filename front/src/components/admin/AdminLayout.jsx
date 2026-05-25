@@ -1,15 +1,13 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../store/adminSlice'
 import styles from './AdminLayout.module.css'
 
 export default function AdminLayout({ children }) {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   function handleLogout() {
     dispatch(logout())
-    navigate('/admin/login')
   }
 
   return (

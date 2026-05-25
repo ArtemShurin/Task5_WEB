@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadProducts } from "../store/productsSlice";
 import { addToCart } from "../store/cartSlice";
 import Header from "../components/Header";
 import Toast from "../components/Toast";
@@ -17,20 +16,16 @@ export default function Catalog() {
   const [categorySearch, setCategorySearch] = useState("");
   const [toast, setToast] = useState("");
 
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(loadProducts());
-    }
-  }, [status, dispatch]);
-
   const filtered = (selectedCategory
     ? products.filter((p) => p.categories?.some((c) => c.id === selectedCategory))
     : products
-  ).filter((p) => p.name.toLowerCase().includes(search.toLowerCase()));
+  )
+    .filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name, 'ru'));
 
-  const filteredCategories = categories.filter((c) =>
-    c.name.toLowerCase().includes(categorySearch.toLowerCase())
-  );
+  const filteredCategories = categories
+    .filter((c) => c.name.toLowerCase().includes(categorySearch.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name, 'ru'));
 
   const handleAddToCart = (product) => {
     if (product.stock === 0) {
@@ -54,8 +49,6 @@ export default function Catalog() {
     <>
       <Header />
       <div className="container">
-        <h1 className="center">Каталог товаров</h1>
-
         {status === "loading" && <h3 className="center">Загрузка...</h3>}
         {status === "failed" && <h3 className="center" style={{ color: "red" }}>{error}</h3>}
 
@@ -87,6 +80,7 @@ export default function Catalog() {
             </aside>
 
             <div className={styles.content}>
+              <h1 className="center">Каталог товаров</h1>
               <input
                 className={styles.productSearch}
                 placeholder="Поиск..."

@@ -1,7 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loadProducts } from "../store/productsSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { addToCartWithQty } from "../store/cartSlice";
 import { fetchReviewsByProduct } from "../api/reviews";
 import Header from "../components/Header";
@@ -23,10 +22,6 @@ export default function Product() {
   const [added, setAdded] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
-
-  useEffect(() => {
-    if (status === "idle") dispatch(loadProducts());
-  }, [status, dispatch]);
 
   useEffect(() => {
     fetchReviewsByProduct(id)
@@ -64,7 +59,15 @@ export default function Product() {
   if (status === "failed")
     return <h2 className="center" style={{ color: "red" }}>{error}</h2>;
   if (!product)
-    return <h2 className="center" style={{ color: "red" }}>Товар не найден</h2>;
+    return (
+      <>
+        <Header />
+        <div className="center" style={{ padding: "40px" }}>
+          <h2 style={{ color: "red", marginBottom: "16px" }}>Товар не найден или был удалён</h2>
+          <Link to="/"><button>Вернуться в каталог</button></Link>
+        </div>
+      </>
+    );
 
   return (
     <>

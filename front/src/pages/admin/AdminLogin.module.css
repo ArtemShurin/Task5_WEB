@@ -70,6 +70,22 @@
   cursor: not-allowed;
 }
 
+.backBtn {
+  padding: 10px;
+  background: none;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.backBtn:hover {
+  border-color: #6366f1;
+  color: #6366f1;
+}
+
 .error {
   background: #fef2f2;
   border: 1px solid #fca5a5;

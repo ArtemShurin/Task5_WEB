@@ -141,7 +141,7 @@ export default function AdminProducts() {
     setEditSaving(true)
     setEditError('')
     try {
-      const updated = await apiUpdateReview(editingReview.id, editForm)
+      const updated = await apiUpdateReview(token, editingReview.id, editForm)
       setReviews((prev) => prev.map((r) => r.id === editingReview.id ? { ...r, ...updated } : r))
       setEditingReview(null)
     } catch (e) {
@@ -154,7 +154,7 @@ export default function AdminProducts() {
   async function handleDeleteReview(reviewId) {
     setDeletingReviewId(reviewId)
     try {
-      await apiDeleteReview(reviewId)
+      await apiDeleteReview(token, reviewId)
       setReviews((prev) => prev.filter((r) => r.id !== reviewId))
     } catch (e) {
       alert(e.message)
@@ -162,6 +162,10 @@ export default function AdminProducts() {
       setDeletingReviewId(null)
     }
   }
+
+  const filteredProducts = products
+    .filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.name.localeCompare(b.name, 'ru'))
 
   return (
     <AdminLayout>
@@ -194,10 +198,10 @@ export default function AdminProducts() {
               </tr>
             </thead>
             <tbody>
-              {products.filter((p) => p.name.toLowerCase().includes(search.toLowerCase())).length === 0 && (
+              {filteredProducts.length === 0 && (
                 <tr><td colSpan={6} className={styles.hint}>Товаров не найдено</td></tr>
               )}
-              {products.filter((p) => p.name.toLowerCase().includes(search.toLowerCase())).map((p) => (
+              {filteredProducts.map((p) => (
                 <tr key={p.id}>
                   <td><span className={styles.idCell}>{p.id}</span></td>
                   <td>

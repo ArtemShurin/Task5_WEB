@@ -62,6 +62,10 @@ export default function AdminLogin() {
         <button className={styles.btn} type="submit" disabled={loading}>
           {loading ? 'Вход...' : 'Войти'}
         </button>
+
+        <button className={styles.backBtn} type="button" onClick={() => navigate('/')}>
+          На главную
+        </button>
       </form>
     </div>
   )

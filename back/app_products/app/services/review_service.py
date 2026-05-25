@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from app.models.review import Review
 from datetime import datetime
-from fastapi import HTTPException
 from app.models.product import Product
 
 def get_all_reviews(db: Session):

@@ -88,6 +88,52 @@ services:
     networks:
       - microservices_net
 
+  # ─── Admin DB ──────────────────────────────────────────────────
+  admin_db:
+    image: postgres:15
+    container_name: admin_db
+    restart: always
+    environment:
+      POSTGRES_DB: admin
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - admin_data:/var/lib/postgresql/data
+    networks:
+      - microservices_net
+
+  # ─── API Gateway ───────────────────────────────────────────────
+  app_gateway:
+    build: ./app_gateway
+    container_name: app_gateway
+    restart: always
+    depends_on:
+      - admin_db
+      - products_app
+      - orders_app
+    environment:
+      POSTGRES_DB: admin
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DB_HOST: admin_db
+      DB_PORT: 5432
+      JWT_SECRET: super-secret-jwt-key-change-in-production
+      JWT_ALGORITHM: HS256
+      JWT_EXPIRE_MINUTES: 480
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: admin123
+      PRODUCTS_SERVICE_URL: http://products_app:8000
+      ORDERS_SERVICE_URL: http://orders_app:8001
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./app_gateway:/app
+    networks:
+      - microservices_net
+
 volumes:
   products_data:
   orders_data:
+  admin_data:

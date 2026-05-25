@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { placeOrder, resetOrder } from "../store/ordersSlice";
 import { clearCart } from "../store/cartSlice";
-import { resetProductsStatus } from "../store/productsSlice";
+import { loadProducts } from "../store/productsSlice";
 import styles from "./Checkout.module.css";
 
 export default function Checkout() {
@@ -39,7 +39,7 @@ export default function Checkout() {
 
     if (placeOrder.fulfilled.match(result)) {
       dispatch(clearCart());
-      dispatch(resetProductsStatus());
+      dispatch(loadProducts());
       navigate("/confirmation");
     }
   };

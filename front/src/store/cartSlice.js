@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { loadProducts } from './productsSlice'
 
 function loadCart() {
   try {
@@ -49,6 +50,24 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.items = []
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(loadProducts.fulfilled, (state, action) => {
+      const productMap = new Map(action.payload.items.map((p) => [p.id, p]))
+      state.items = state.items
+        .filter((item) => productMap.has(item.id))
+        .map((item) => {
+          const current = productMap.get(item.id)
+          return {
+            ...item,
+            name: current.name,
+            price: current.price,
+            image_url: current.image_url,
+            stock: current.stock,
+            qty: Math.min(item.qty, current.stock) || 1,
+          }
+        })
+    })
   },
 })
 

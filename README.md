@@ -5,10 +5,12 @@
 
 Запуск:
 
-В директории back выполнить команду docker-compose up --build
+В директории back выполнить команду docker-compose up --build.
 
-В директории back выполнить команду npm run dev   
+В директории back выполнить команду npm run dev.
 
+Для входа под администратором предусмотрен базовый профиль, логин: admin; пароль: admin123.
+Дополнительные профили можно создать через swagger (нужно быть авторизованным под администратором) или напрямую в базе данных.
 
 Видео демонстрации работы проекта доступны по ссылке:  
-https://drive.google.com/drive/folders/1lTzEMHZCg2TJRoRZAB3Vl1s-8VpcO37u?usp=sharing
+https://drive.google.com/drive/folders/1Kj7sIKqBQLGkX1eQflu0R-myNrJbW-9m?usp=sharing
